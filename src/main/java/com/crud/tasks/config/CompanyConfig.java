@@ -16,4 +16,7 @@ public class CompanyConfig {
 
     @Value("${info.company.phone}")
     private String companyPhone;
+
+    @Value("${info.company.goal}")
+    private String companyGoal;
 }

@@ -1,5 +1,6 @@
 package com.crud.tasks.service;
 
+import com.crud.tasks.check.MailCheck;
 import com.crud.tasks.domain.Mail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,7 @@ public class SimpleEmailService {
     private JavaMailSender javaMailSender;
 
     @Autowired
-    private MailCreatorService mailCreatorService;
+    private MailCheck mailCheck;
 
     public void send(final Mail mail) {
         LOGGER.info("Starting email preparation...");
@@ -37,7 +38,7 @@ public class SimpleEmailService {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setTo(mail.getMailTo());
             messageHelper.setSubject(mail.getSubject());
-            messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()),true);
+            messageHelper.setText(mailCheck.checkMail(mail),true);
         };
     }
 
